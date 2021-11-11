@@ -11,38 +11,42 @@ func _ready():
 	
 
 func _on_update_call():
-	audio_key = Singleton.all_sound_files.keys().pop_back()
-	FileName.text = audio_key
-	audio_stream = Singleton.all_sound_files[audio_key]
+	if (Singleton.all_sound_files.keys().size() > 0 ):
+		audio_key = Singleton.all_sound_files.keys().pop_back()
+		FileName.text = audio_key
+		audio_stream = Singleton.all_sound_files[audio_key]
 
 
 
 func _on_Next_pressed():
-	if (audio_stream == null):
-		_on_update_call()
-	else:
-		var i = Singleton.all_sound_files.keys().find(audio_key)
-		if (i == Singleton.all_sound_files.keys().size()-1):
-			i = 0
+	if (Singleton.all_sound_files.keys().size() > 0 ):
+		if (audio_stream == null):
+			_on_update_call()
 		else:
-			i += 1
-		audio_key = Singleton.all_sound_files.keys()[i]
-		FileName.text = audio_key
-		audio_stream = Singleton.all_sound_files[audio_key]
+			var i = Singleton.all_sound_files.keys().find(audio_key)
+			if (i == Singleton.all_sound_files.keys().size()-1):
+				i = 0
+			else:
+				i += 1
+			audio_key = Singleton.all_sound_files.keys()[i]
+			FileName.text = audio_key
+			audio_stream = Singleton.all_sound_files[audio_key]
 		
 
 func _on_Play_pressed():
-	var dir = Directory.new()
-	print("file exists: ", dir.file_exists(audio_key))
-	
-	AudioPlayer.stop()
-	AudioPlayer.stream = audio_stream
-	AudioPlayer.play()
+	if (Singleton.all_sound_files.keys().size() > 0 ):
+		var dir = Directory.new()
+		print("file exists: ", dir.file_exists(audio_key))
+		
+		AudioPlayer.stop()
+		AudioPlayer.stream = audio_stream
+		AudioPlayer.play()
 
 
 func _on_LoadFile_pressed():
-	var dir = Directory.new()
-	
-	print("file exists: ", dir.file_exists(audio_key))
-	var file = load(audio_key)
-	audio_stream = file
+	if (Singleton.all_sound_files.keys().size() > 0 ):
+		var dir = Directory.new()
+		
+		print("file exists: ", dir.file_exists(audio_key))
+		var file = load(audio_key)
+		audio_stream = file
