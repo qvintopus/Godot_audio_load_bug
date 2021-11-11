@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Recorder.gd" type="Script" id=1]
+
+[sub_resource type="AudioStreamMicrophone" id=1]
+
+[node name="Recorder" type="PanelContainer"]
+margin_right = 576.0
+margin_bottom = 370.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamRecord" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 1 )
+autoplay = true
+bus = "Record"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 569.0
+margin_bottom = 363.0
+
+[node name="Record" type="Button" parent="VBoxContainer"]
+margin_right = 562.0
+margin_bottom = 20.0
+text = "Record"
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 562.0
+margin_bottom = 44.0
+text = "Play"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+margin_top = 48.0
+margin_right = 562.0
+margin_bottom = 72.0
+
+[node name="Save" type="Button" parent="VBoxContainer"]
+margin_top = 76.0
+margin_right = 562.0
+margin_bottom = 96.0
+text = "Save"
+
+[node name="Status" type="Label" parent="VBoxContainer"]
+margin_top = 100.0
+margin_right = 562.0
+margin_bottom = 114.0
+text = "..."
+[connection signal="pressed" from="VBoxContainer/Record" to="." method="_on_Record_pressed"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Save" to="." method="_on_Save_pressed"]

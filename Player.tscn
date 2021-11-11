@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+
+[node name="Player" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 72.0
+margin_bottom = 103.0
+
+[node name="Next" type="Button" parent="VBoxContainer"]
+margin_right = 65.0
+margin_bottom = 20.0
+text = "next"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 65.0
+margin_bottom = 48.0
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+margin_top = 52.0
+margin_right = 65.0
+margin_bottom = 72.0
+text = "Play"
+
+[node name="LoadFile" type="Button" parent="VBoxContainer"]
+margin_top = 76.0
+margin_right = 65.0
+margin_bottom = 96.0
+text = "LoadFile"
+[connection signal="pressed" from="VBoxContainer/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadFile" to="." method="_on_LoadFile_pressed"]
